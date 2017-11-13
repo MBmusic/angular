@@ -1,0 +1,87 @@
+* {
+	outline: none;
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: #1e3042;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul, li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+.header {
+    width: 100%;
+    height: 110px;
+    background: #13202c;
+}
+
+.users-list {
+    padding: 25px 15px;
+}
+
+.users-list .user-block {
+    width: 32%;
+    float: left;
+    margin-bottom: 15px;
+    margin-right: 2%;
+}
+
+.users-list .user-block:nth-child(3) {
+    margin-right: 0;
+}
+
+.users-list .user-block .ub-img {
+    width: 120px;
+    height: 120px;
+    float: left;
+    overflow: hidden;
+}
+
+.users-list .user-block .ub-img img {
+    width: 100%;
+}
+
+.users-list .user-block .ub-info {
+    float: left;
+    margin-left: 15px;
+    width: calc(100% - 135px);
+}
+
+.users-list .user-block .ub-info span {
+    display: block;
+    color: #ffd200;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.users-list .user-block .ub-info span b {
+    font-weight: normal;
+    color: #7a8a9b;
+}
+
+.users-list .user-block .ub-info span.ub-name {
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+
+}
