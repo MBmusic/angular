@@ -3,12 +3,12 @@
         <img src="assets/img/logo.png" alt="">
     </div>
 
-    <div class="users-list">
-        <div class="user-block" *ngFor="let dataUser of dataUsers">
+    <div class="users-list" *ngIf="dataUsers.length > 0">
+        <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy">
             <div class="ub-img"> 
                 <img src="{{ dataUser.avatarUrl }}" alt="">
             </div>
-
+            
             <div class="ub-info">
                 <span class="ub-name">{{ dataUser.surname }} {{ dataUser.name }} {{ dataUser.patronymic }}</span>
                 <span class="ub-position"><b>Должность:</b> {{ dataUser.position }}</span>
@@ -20,6 +20,10 @@
         </div>
 
         <div class="clear"></div>
+    </div>
+
+    <div class="users-list-clean" *ngIf="dataUsers.length == 0">
+        Список сотрудников пуст
     </div>
   
 </div>

@@ -83,5 +83,12 @@ ul, li {
     color: #fff;
     font-weight: 700;
     font-size: 18px;
+}
 
+.users-list-clean {
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 22px;
+    padding: 75px 15px;
 }
