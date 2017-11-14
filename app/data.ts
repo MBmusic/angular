@@ -19,7 +19,7 @@ export const dataUsers = [
     },
     {
         avatarUrl: "/assets/img/user.jpg",
-        name: "Вася",
+        name: "Саша",
         surname: "Артемов",
         patronymic: "Васильевич",
         position: "программист",

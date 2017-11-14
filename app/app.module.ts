@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { enableProdMode } from '@angular/core';
-import { FactorialPipe} from './sort.pipe';
+import { SortUsersPipe } from './sort.pipe';
+import { FilterPipe } from './search.pipe';
 
 enableProdMode();
 
 @NgModule({
-    declarations: [ AppComponent,FactorialPipe ],
-    imports: [ BrowserModule ],
+    declarations: [ AppComponent, SortUsersPipe, FilterPipe ],
+    imports: [ BrowserModule, FormsModule ],
     providers: [],
     bootstrap: [AppComponent]
 })

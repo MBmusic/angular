@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'orderBy'
 })
 
-export class FactorialPipe implements PipeTransform {
+export class SortUsersPipe implements PipeTransform {
     transform(array: Array<any>) {
         return array.sort((a, b) => {
             if (a.surname > b.surname) {

@@ -1,31 +1,67 @@
-<div>
-    <div class="header">
-        <img src="assets/img/logo.png" alt="">
-    </div>
+<div id="my-id" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        
+        <div class="popup-content">
+            <div class="title">Добавить должность</div>
 
-    <div class="users-list" *ngIf="dataUsers.length > 0">
-        <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy">
-            <div class="ub-img"> 
-                <img src="{{ dataUser.avatarUrl }}" alt="">
+            <form (submit)="createPosition($event, positionInput.value)">
+                <div class="label">
+                    <input type="text" placeholder="Должность" #positionInput>
+                </div>
+
+                <div class="label">
+                    <button type="submit" class="btn head-btn-add">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<form method="post">
+    <div>
+        <div class="header">
+            <div class="logo">
+                <img src="assets/img/logo.png" alt="">
             </div>
-            
-            <div class="ub-info">
-                <span class="ub-name">{{ dataUser.surname }} {{ dataUser.name }} {{ dataUser.patronymic }}</span>
-                <span class="ub-position"><b>Должность:</b> {{ dataUser.position }}</span>
-                <span class="ub-skype"><b>Skype:</b> {{ dataUser.skype }}</span>
-                <span class="ub-email"><b>E-mail:</b> {{ dataUser.email }}</span>
+
+            <div class="head-search">
+                <div class="label">
+                    <input type="text" [(ngModel)]="searchUser" name="search" placeholder="Поиск...">
+                </div>
+            </div>
+
+            <div class="head-btn-admin">
+                <a href="#my-id" class="btn head-btn-add" data-uk-modal>+ должность</a>
+                <a href="" class="btn head-btn-add">+ сотрудник</a>  
             </div>
 
             <div class="clear"></div>
         </div>
 
-        <div class="clear"></div>
-    </div>
+        <div class="users-list" *ngIf="dataUsers.length > 0">
+            <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser">
+                <div class="ub-img"> 
+                    <img src="{{ dataUser.avatarUrl }}" alt="">
+                </div>
+                
+                <div class="ub-info">
+                    <span class="ub-name">{{ dataUser.surname }} {{ dataUser.name }} {{ dataUser.patronymic }}</span>
+                    <span class="ub-position"><b>Должность:</b> {{ dataUser.position }}</span>
+                    <span class="ub-skype"><b>Skype:</b> {{ dataUser.skype }}</span>
+                    <span class="ub-email"><b>E-mail:</b> {{ dataUser.email }}</span>
+                </div>
 
-    <div class="users-list-clean" *ngIf="dataUsers.length == 0">
-        Список сотрудников пуст
+                <div class="clear"></div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="users-list-clean" *ngIf="dataUsers.length == 0">
+            Список сотрудников пуст
+        </div>
     </div>
-  
-</div>
+</form>
 
 
