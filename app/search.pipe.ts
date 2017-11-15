@@ -6,8 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class FilterPipe implements PipeTransform {
     transform(items: any[], searchUser: string) { 
-        if(!items) return [];
-        if(!searchUser) return items;
+        if(!items) {
+            return [];
+        }
+
+        if(!searchUser) { 
+            return items; 
+        }
 
         searchUser = searchUser.toLowerCase();
         

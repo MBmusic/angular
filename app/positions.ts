@@ -1,1 +1,5 @@
-export const positionUsers = [];
+export const positionUsers = [
+    {
+        position: "программист"
+    }
+];

@@ -15,13 +15,19 @@ export class AppComponent {
     createPosition(event: Event, title: string) {
         event.preventDefault();
 
+        /*if(!title) {
+            return false;
+        }*/
+        
+        if(title == "") {
+            return false;
+        }
+
         let pos = {
             position: title
         };
 
         positionUsers.push(pos);
-
-        console.log(positionUsers);
     }
 }
 

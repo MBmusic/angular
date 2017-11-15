@@ -5,12 +5,16 @@
         <div class="popup-content">
             <div class="title">Добавить должность</div>
 
-            <form (submit)="createPosition($event, positionInput.value)">
+            <form (submit)="createPosition($event, positionInput.value); formRosition.reset()" #formRosition="ngForm">
                 <div class="label">
-                    <input type="text" placeholder="Должность" #positionInput>
+                    <input type="text" placeholder="Должность" name="position" [(ngModel)]="fieldPosition" #positionInput>
                 </div>
 
-                <div class="label">
+                <div *ngIf="formRosition.submitted">
+                    error
+                </div>
+
+                <div class="label label-btn">
                     <button type="submit" class="btn head-btn-add">Добавить</button>
                 </div>
             </form>
@@ -40,6 +44,10 @@
         </div>
 
         <div class="users-list" *ngIf="dataUsers.length > 0">
+            <div class="users-list-clean" *ngIf="(dataUsers | filter : searchUser).length == 0">
+                По вашему запросу ничего не найдено
+            </div>
+            
             <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser">
                 <div class="ub-img"> 
                     <img src="{{ dataUser.avatarUrl }}" alt="">
