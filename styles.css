@@ -222,3 +222,45 @@ button {
     margin: 0 auto;
     width: 160px;
 }
+
+.errorMessage {
+    display: block;
+    text-align: left;
+    color: #fff;
+    background: #ff6969;
+    padding: 8px 15px 4px;
+    margin-top: -4px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.uk-modal-content {
+    color: #fff;
+    text-align: center;
+}
+
+.uk-modal-footer .uk-modal-close {
+    display: block;
+    text-align: center;
+    position: static;
+    text-transform: uppercase;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 13px;
+    background: #009db3;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    margin: 0 auto !important;
+    width: 100px;
+}
+
+.uk-modal-footer .uk-modal-close:hover {
+    color: #fff;
+    text-decoration: none;
+    background: #06aec6;
+}
+
+body > .uk-modal .uk-modal-dialog {
+    width: 200px;
+}

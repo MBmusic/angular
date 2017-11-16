@@ -3,6 +3,8 @@ import { dataUsers } from "./data";
 import { positionUsers } from "./positions";
 import { Pipe } from "@angular/core";
 
+declare var UIkit:any;
+
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
@@ -10,24 +12,45 @@ import { Pipe } from "@angular/core";
 })
 
 export class AppComponent {
-    dataUsers = dataUsers;
+    dataUsers: Array<any> = dataUsers;
+    positionInput: string = '';
+    fieldError: boolean = true;
+    fieldErrorMessage:string = "";
+    //fieldErrorHasPosition:string = "Такая должность уже добавлена";
 
-    createPosition(event: Event, title: string) {
-        event.preventDefault();
+    log(val) { 
+        console.log(val); 
+    }
 
-        /*if(!title) {
-            return false;
-        }*/
-        
-        if(title == "") {
-            return false;
+    createPosition() {
+        if(this.positionInput == "") {
+            this.fieldErrorMessage = "Заполните поле";
+            return this.fieldError = false;       
         }
 
+        positionUsers.forEach(element => {
+            
+            if(this.positionInput == element.position) {
+                console.log(this.positionInput);
+                console.log(element.position);
+                this.fieldErrorMessage = "Такая должность уже добавлена";
+                return this.fieldError = false;
+            }
+        });
+
         let pos = {
-            position: title
+            position: this.positionInput
         };
 
         positionUsers.push(pos);
+
+        //console.log(positionUsers);
+
+        this.positionInput = '';
+        UIkit.modal.alert("Должность добавлена!");
+
+        return this.fieldError = true;
     }
+    
 }
 
