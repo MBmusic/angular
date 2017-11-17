@@ -16,35 +16,29 @@ export class AppComponent {
     positionInput: string = '';
     fieldError: boolean = true;
     fieldErrorMessage:string = "";
-    //fieldErrorHasPosition:string = "Такая должность уже добавлена";
 
     log(val) { 
         console.log(val); 
     }
 
-    createPosition() {
+    createPosition() {      
         if(this.positionInput == "") {
             this.fieldErrorMessage = "Заполните поле";
             return this.fieldError = false;       
         }
 
-        positionUsers.forEach(element => {
-            
-            if(this.positionInput == element.position) {
-                console.log(this.positionInput);
-                console.log(element.position);
+        for(let i = 0; i < positionUsers.length; i++) {
+            if(this.positionInput == positionUsers[i].position) {
                 this.fieldErrorMessage = "Такая должность уже добавлена";
                 return this.fieldError = false;
-            }
-        });
+            }     
+        }
 
         let pos = {
             position: this.positionInput
         };
 
         positionUsers.push(pos);
-
-        //console.log(positionUsers);
 
         this.positionInput = '';
         UIkit.modal.alert("Должность добавлена!");
