@@ -26,9 +26,37 @@
                 <img src="assets/img/logo.png" alt="">
             </div>
 
-            <div class="head-search">
+            <div class="head-search" [ngClass]="addClassPositions()">
                 <div class="label">
                     <input type="text" [(ngModel)]="searchUser" name="search" placeholder="Поиск...">
+                </div>
+            </div>
+
+            <div class="head-positions-drop" *ngIf="positionUsers.length > 0">
+                <div class="hp-drop" data-uk-dropdown="{mode:'click'}">   
+                    <div class="hp-drop-title">Выберите должность</div>
+                    <div class="uk-dropdown">
+                        <div class="hp-select-all">
+                            <label>
+                                <input type="checkbox" name="1"> 
+                                <span>Выделить все</span>
+                            </label>
+
+                            <span class="item delete"></span>
+
+                            <div class="clear"></div>
+                        </div>
+                        <div *ngFor="let positionUser of positionUsers">
+                            <label>
+                                <input type="checkbox"> 
+                                <span>{{ positionUser.position }}</span>
+                            </label>
+
+                            <span class="item delete" (click)="deletePosition(positionUser)"></span>
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>   
                 </div>
             </div>
 

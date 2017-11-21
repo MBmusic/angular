@@ -29,7 +29,7 @@ ul, li {
 	clear: both;
 }
 
-input {
+input:not([type="checkbox"]) {
     width: 100%;
     height: 40px;
     background: #435c74;
@@ -39,6 +39,11 @@ input {
     color: #d4dde6;
     font-size: 16px;
     padding: 0 15px;
+}
+
+input:not([type="checkbox"]):focus {
+    border: solid 2px #06aec6;
+    padding-left: 13px;
 }
 
 input::-webkit-input-placeholder {color:#d4dde6;}
@@ -79,14 +84,151 @@ button {
 
 .head-search {
     float: left;
+    width: calc(80% - 439px);
+    padding: 10px 10px 0;
+}
+
+.head-search.no-positions {
     width: calc(100% - 439px);
-    padding: 0 25px 0 10px;
-    padding-top: 10px;
 }
 
 .head-search input {
     background: #435c74 url(assets/img/search.png) 12px 10px no-repeat;
     padding-left: 42px;
+}
+
+.head-search input:focus {
+    padding-left: 40px;
+    background-position: 10px 8px;
+}
+
+.head-positions-drop {
+    width: 20%;
+    float: left;
+    position: relative;
+    padding: 10px 10px 0;
+}
+
+.hp-drop .hp-drop-title {
+    width: 100%;
+    height: 40px;
+    background: #435c74 url(assets/img/arrow-select.png) right center no-repeat;
+    border: 0 none;
+    border-radius: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #d4dde6;
+    font-size: 16px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.hp-drop .hp-drop-title:hover {
+    background: #4f6983 url(assets/img/arrow-select.png) right center no-repeat;
+}
+
+.hp-drop.uk-open .hp-drop-title {
+    border: solid 2px #06aec6;
+    padding: 0 13px; 
+}
+
+.hp-drop.uk-open .hp-drop-title {
+    line-height: 36px;
+}
+
+.hp-drop .hp-drop-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 40px;
+}
+
+.hp-drop .uk-dropdown {
+    width: calc(100% - 20px);
+    left: 10px !important;
+    border-radius: 5px;
+    background: #435c74;
+    color: #fff;
+    padding: 0px;
+    z-index: 1000;
+}
+
+.hp-drop .uk-dropdown div:not(.clear) {
+    height: 40px;
+}
+
+.hp-drop .uk-dropdown div label {
+    width: 100%;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+    line-height: 38px;
+    float: left;
+}
+
+.hp-drop .uk-dropdown div.hp-select-all {
+    background: #89ae39;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.hp-drop .uk-dropdown div label {
+    width: calc(100% - 40px);
+}
+
+.hp-drop .uk-dropdown div .item {
+    float: right;
+    width: 40px;
+    height: 40px;
+    display: block;
+    cursor: pointer;
+}
+
+.hp-drop .uk-dropdown div .item.delete {
+    background: #779c26 url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div .item.delete:hover {
+    background: #6f9126 url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div.hp-select-all .item {
+    border-radius: 0px 5px 0px 0px;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover {
+    background: #4f6983;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all) .item {
+    display: none;
+    background: #3b5165 url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item {
+    display: block;
+    background: #3b5165 url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item:hover {
+    background: #3c566a url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:last-child {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.hp-drop .uk-dropdown div:last-child .item.delete {
+    border-radius: 0px 0px 5px 0px;
+}
+
+.hp-drop .uk-dropdown label input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.hp-drop .uk-dropdown label span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
 }
 
 .head-btn-admin .btn {

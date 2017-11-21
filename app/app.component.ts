@@ -13,6 +13,7 @@ declare var UIkit:any;
 
 export class AppComponent {
     dataUsers: Array<any> = dataUsers;
+    positionUsers: Array<any> = positionUsers;
     positionInput: string = '';
     fieldError: boolean = true;
     fieldErrorMessage:string = "";
@@ -27,8 +28,10 @@ export class AppComponent {
             return this.fieldError = false;       
         }
 
+        let LowerThisPosition = this.positionInput.toLowerCase();
+
         for(let i = 0; i < positionUsers.length; i++) {
-            if(this.positionInput == positionUsers[i].position) {
+            if(LowerThisPosition == positionUsers[i].position.toLowerCase()) {
                 this.fieldErrorMessage = "Такая должность уже добавлена";
                 return this.fieldError = false;
             }     
@@ -44,6 +47,19 @@ export class AppComponent {
         UIkit.modal.alert("Должность добавлена!");
 
         return this.fieldError = true;
+    }
+
+    addClassPositions() {
+        return (positionUsers.length > 0) ? "" : "no-positions";
+    }
+
+    deletePosition(position: any) {
+        UIkit.modal.confirm("Are you sure?", function(){
+            // will be executed on confirm.
+            console.log(123);
+        });
+
+        //console.log(position);
     }
     
 }
