@@ -174,12 +174,20 @@ button {
     width: calc(100% - 40px);
 }
 
+.hp-drop .uk-dropdown div:not(.hp-select-all) label {
+    width: calc(100% - 80px);
+}
+
 .hp-drop .uk-dropdown div .item {
     float: right;
     width: 40px;
     height: 40px;
     display: block;
     cursor: pointer;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all) .item.edit {
+    border-right: solid 1px #334453;
 }
 
 .hp-drop .uk-dropdown div .item.delete {
@@ -198,18 +206,32 @@ button {
     background: #4f6983;
 }
 
-.hp-drop .uk-dropdown div:not(.hp-select-all) .item {
+.hp-drop .uk-dropdown div:not(.hp-select-all) .item.delete {
     display: none;
     background: #3b5165 url(assets/img/delete-icon.png) center no-repeat;
 }
 
-.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item {
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item.delete {
     display: block;
     background: #3b5165 url(assets/img/delete-icon.png) center no-repeat;
 }
 
-.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item:hover {
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item.delete:hover {
     background: #3c566a url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all) .item.edit {
+    display: none;
+    background: #3b5165 url(assets/img/edit-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item.edit {
+    display: block;
+    background: #3b5165 url(assets/img/edit-icon.png) center no-repeat;
+}
+
+.hp-drop .uk-dropdown div:not(.hp-select-all):hover .item.edit:hover {
+    background: #3c566a url(assets/img/edit-icon.png) center no-repeat;
 }
 
 .hp-drop .uk-dropdown div:last-child {
@@ -380,7 +402,9 @@ button {
     text-align: center;
 }
 
-.uk-modal-footer .uk-modal-close {
+.uk-modal-footer .uk-modal-close,
+.uk-modal-footer .js-modal-confirm-cancel,
+.uk-modal-footer .js-modal-confirm {
     display: block;
     text-align: center;
     position: static;
@@ -397,7 +421,9 @@ button {
     width: 100px;
 }
 
-.uk-modal-footer .uk-modal-close:hover {
+.uk-modal-footer .uk-modal-close:hover,
+.uk-modal-footer .js-modal-confirm-cancel:hover,
+.uk-modal-footer .js-modal-confirm:hover {
     color: #fff;
     text-decoration: none;
     background: #06aec6;
@@ -405,4 +431,22 @@ button {
 
 body > .uk-modal .uk-modal-dialog {
     width: 200px;
+}
+
+.uk-modal-footer .js-modal-confirm-cancel,
+.uk-modal-footer .js-modal-confirm {
+    width: 70px;
+    display: inline-block;
+}
+
+.uk-modal-footer {
+    text-align: center !important;
+}
+
+.uk-modal-footer .js-modal-confirm {
+    background: #89ae39;
+}
+
+.uk-modal-footer .js-modal-confirm:hover {
+    background: #95bc3f;
 }

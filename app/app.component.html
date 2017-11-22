@@ -1,18 +1,18 @@
-<div id="my-id" class="uk-modal">
+<div id="popup-positions" class="uk-modal">
     <div class="uk-modal-dialog">   
         <a class="uk-modal-close uk-close"></a>
         
         <div class="popup-content">
-            <div class="title">Добавить должность</div>
+            <div class="title">{{ titleAddPosition }}</div>
 
-            <form (ngSubmit)="createPosition();">
+            <form (ngSubmit)="createChangePosition()">
                 <div class="label">
-                    <input type="text" placeholder="Должность" name="position" [(ngModel)]="positionInput" required>
+                    <input type="text" placeholder="Должность" name="position" value="Здесь текст" [(ngModel)]="positionInput" required>
                     <span *ngIf="!fieldError" class="errorMessage">{{ fieldErrorMessage }}</span>
                 </div>
 
                 <div class="label label-btn">
-                    <button type="submit" class="btn head-btn-add">Добавить</button>
+                    <button type="submit" class="btn head-btn-add">{{ titleBtnAddPosition }}</button>
                 </div>
             </form>
         </div>
@@ -37,22 +37,23 @@
                     <div class="hp-drop-title">Выберите должность</div>
                     <div class="uk-dropdown">
                         <div class="hp-select-all">
-                            <label>
+                            <label (click)="checkItem()" #checkItem>
                                 <input type="checkbox" name="1"> 
                                 <span>Выделить все</span>
                             </label>
 
-                            <span class="item delete"></span>
+                            <span class="item delete" (click)="deleteAllPosition()"></span>
 
                             <div class="clear"></div>
                         </div>
                         <div *ngFor="let positionUser of positionUsers">
                             <label>
-                                <input type="checkbox"> 
+                                <input type="checkbox" name="check" [(ngModel)]="positionUser.selected"> 
                                 <span>{{ positionUser.position }}</span>
                             </label>
-
+ 
                             <span class="item delete" (click)="deletePosition(positionUser)"></span>
+                            <a href="#popup-positions" class="item edit" (click)="changePositionPopup(positionUser.position, positionUsers.indexOf(positionUser))" data-uk-modal></a>
 
                             <div class="clear"></div>
                         </div>
@@ -61,7 +62,7 @@
             </div>
 
             <div class="head-btn-admin">
-                <a href="#my-id" class="btn head-btn-add" data-uk-modal>+ должность</a>
+                <a href="#popup-positions" class="btn head-btn-add" (click)="addPositionPopup(addPodition)" data-uk-modal>+ должность</a>
                 <a href="" class="btn head-btn-add">+ сотрудник</a>  
             </div>
 
@@ -73,7 +74,7 @@
                 По вашему запросу ничего не найдено
             </div>
             
-            <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser">
+            <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser | checkFilter : checkItem">
                 <div class="ub-img"> 
                     <img src="{{ dataUser.avatarUrl }}" alt="">
                 </div>

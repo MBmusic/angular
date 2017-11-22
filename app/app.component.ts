@@ -16,20 +16,37 @@ export class AppComponent {
     positionUsers: Array<any> = positionUsers;
     positionInput: string = '';
     fieldError: boolean = true;
-    fieldErrorMessage:string = "";
+    fieldErrorMessage: string = "";
+    titleAddPosition: string = "";
+    titleBtnAddPosition: string = "";
+    addChangePosition: string = "";
+    positionNum: number;
 
-    log(val) { 
-        console.log(val); 
+    positionTitlesPopup(mainTitle: string, btnTitle: string, eventUser: string) {
+        this.fieldError = true;
+        this.titleAddPosition = mainTitle;
+        this.titleBtnAddPosition = btnTitle;
+        this.addChangePosition = eventUser;
     }
 
-    createPosition() {      
+    addPositionPopup() {
+        this.positionTitlesPopup("Добавить должность", "Добавить", "добавление");
+    }
+
+    changePositionPopup(position: string, num: number) {
+        this.positionNum = num;
+        this.positionInput = position;
+        this.positionTitlesPopup("Изменить должность", "Изменить", "изменение");
+    }
+
+    createChangePosition() {  
         if(this.positionInput == "") {
             this.fieldErrorMessage = "Заполните поле";
             return this.fieldError = false;       
         }
 
         let LowerThisPosition = this.positionInput.toLowerCase();
-
+        
         for(let i = 0; i < positionUsers.length; i++) {
             if(LowerThisPosition == positionUsers[i].position.toLowerCase()) {
                 this.fieldErrorMessage = "Такая должность уже добавлена";
@@ -37,29 +54,43 @@ export class AppComponent {
             }     
         }
 
-        let pos = {
-            position: this.positionInput
-        };
+        if(this.addChangePosition == "добавление") {
+            let pos = {
+                position: this.positionInput,
+                selected: true
+            };
 
-        positionUsers.push(pos);
+            positionUsers.push(pos);
 
-        this.positionInput = '';
-        UIkit.modal.alert("Должность добавлена!");
+            this.positionInput = '';
+            UIkit.modal.alert("Должность добавлена!");
 
-        return this.fieldError = true;
+            return this.fieldError = true;
+
+        } else if(this.addChangePosition == "изменение") {
+            positionUsers[this.positionNum].position = this.positionInput;
+            return this.fieldError = true;
+        }
     }
 
     addClassPositions() {
         return (positionUsers.length > 0) ? "" : "no-positions";
     }
 
-    deletePosition(position: any) {
-        UIkit.modal.confirm("Are you sure?", function(){
-            // will be executed on confirm.
-            console.log(123);
+    deletePosition(position: any) {       
+        UIkit.modal.confirm("Вы уверены что хотите удалить должность?", () => {
+            let index = this.positionUsers.indexOf(position);
+    
+            if(index > -1) {
+                this.positionUsers.splice(index, 1);
+            }
         });
+    }
 
-        //console.log(position);
+    deleteAllPosition() {
+        UIkit.modal.confirm("Вы уверены что хотите удалить все должности?", () => {
+            return this.positionUsers.length = 0;
+        });
     }
     
 }

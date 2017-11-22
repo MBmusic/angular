@@ -5,11 +5,12 @@ import { AppComponent } from './app.component';
 import { enableProdMode } from '@angular/core';
 import { SortUsersPipe } from './sort.pipe';
 import { FilterPipe } from './search.pipe';
+import { CheckPipe } from './check.pipe';
 
 enableProdMode();
 
 @NgModule({
-    declarations: [ AppComponent, SortUsersPipe, FilterPipe ],
+    declarations: [ AppComponent, SortUsersPipe, FilterPipe, CheckPipe ],
     imports: [ BrowserModule, FormsModule ],
     providers: [],
     bootstrap: [AppComponent]
