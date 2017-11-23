@@ -1,14 +1,14 @@
 export const positionUsers = [
     {
         position: "PHP developer",
-        selected: true
+        selected: false
     },
     {
         position: "Front-end developer",
-        selected: true
+        selected: false
     },
     {
         position: "SEO specialist",
-        selected: true
+        selected: false
     }
 ];

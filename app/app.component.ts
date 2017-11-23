@@ -22,6 +22,14 @@ export class AppComponent {
     addChangePosition: string = "";
     positionNum: number;
 
+    log(i) {
+        console.log(i);
+    }
+
+    changeCheckboxes() {
+        this.positionUsers = this.positionUsers.slice();
+    }  
+
     positionTitlesPopup(mainTitle: string, btnTitle: string, eventUser: string) {
         this.fieldError = true;
         this.titleAddPosition = mainTitle;

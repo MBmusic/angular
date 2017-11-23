@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CheckPipe implements PipeTransform {
-    transform(items: any[]) { 
-        //console.log(123);
+    transform(items: any[], check: any) { 
+        console.log(check);
         return items;
    }
 }

@@ -37,9 +37,10 @@
                     <div class="hp-drop-title">Выберите должность</div>
                     <div class="uk-dropdown">
                         <div class="hp-select-all">
-                            <label (click)="checkItem()" #checkItem>
-                                <input type="checkbox" name="1"> 
+                            <label>
+                                <input type="checkbox" name="1" [(ngModel)]="itemCheck"> 
                                 <span>Выделить все</span>
+                                
                             </label>
 
                             <span class="item delete" (click)="deleteAllPosition()"></span>
@@ -48,8 +49,9 @@
                         </div>
                         <div *ngFor="let positionUser of positionUsers">
                             <label>
-                                <input type="checkbox" name="check" [(ngModel)]="positionUser.selected"> 
+                                <input type="checkbox" name="position" [(ngModel)]="positionUser.selected" (ngModelChange)="changeCheckboxes()"> 
                                 <span>{{ positionUser.position }}</span>
+                                
                             </label>
  
                             <span class="item delete" (click)="deletePosition(positionUser)"></span>
@@ -57,6 +59,8 @@
 
                             <div class="clear"></div>
                         </div>
+
+                        
                     </div>   
                 </div>
             </div>
@@ -74,7 +78,7 @@
                 По вашему запросу ничего не найдено
             </div>
             
-            <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser | checkFilter : checkItem">
+            <div class="user-block" *ngFor="let dataUser of dataUsers | orderBy | filter : searchUser | checkFilter : positionUsers">
                 <div class="ub-img"> 
                     <img src="{{ dataUser.avatarUrl }}" alt="">
                 </div>
