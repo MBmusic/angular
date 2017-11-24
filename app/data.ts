@@ -4,7 +4,7 @@ export const dataUsers = [
         name: "Вася",
         surname: "Петров",
         patronymic: "Васильевич",
-        position: "программист",
+        position: "PHP developer",
         email: "test@test.com",
         skype: "vasya.dijust"
     },
@@ -13,7 +13,7 @@ export const dataUsers = [
         name: "Вася",
         surname: "Иванов",
         patronymic: "Васильевич",
-        position: "программист",
+        position: "PHP developer",
         email: "test@test.com",
         skype: "vasya.dijust"
     },
@@ -22,7 +22,7 @@ export const dataUsers = [
         name: "Саша",
         surname: "Артемов",
         patronymic: "Васильевич",
-        position: "программист",
+        position: "Front-end developer",
         email: "test@test.com",
         skype: "vasya.dijust"
     },
@@ -31,7 +31,7 @@ export const dataUsers = [
         name: "Вася",
         surname: "Бобров",
         patronymic: "Васильевич",
-        position: "программист",
+        position: "SEO specialist",
         email: "test@test.com",
         skype: "vasya.dijust"
     }

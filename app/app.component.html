@@ -38,9 +38,8 @@
                     <div class="uk-dropdown">
                         <div class="hp-select-all">
                             <label>
-                                <input type="checkbox" name="1" [(ngModel)]="itemCheck"> 
-                                <span>Выделить все</span>
-                                
+                                <input type="checkbox" name="1" [checked]="itemCheck()" (change)="selectAllCheckboxes($event)"> 
+                                <span>Выделить все</span> 
                             </label>
 
                             <span class="item delete" (click)="deleteAllPosition()"></span>
@@ -51,7 +50,6 @@
                             <label>
                                 <input type="checkbox" name="position" [(ngModel)]="positionUser.selected" (ngModelChange)="changeCheckboxes()"> 
                                 <span>{{ positionUser.position }}</span>
-                                
                             </label>
  
                             <span class="item delete" (click)="deletePosition(positionUser)"></span>
@@ -59,8 +57,6 @@
 
                             <div class="clear"></div>
                         </div>
-
-                        
                     </div>   
                 </div>
             </div>
@@ -74,7 +70,7 @@
         </div>
 
         <div class="users-list" *ngIf="dataUsers.length > 0">
-            <div class="users-list-clean" *ngIf="(dataUsers | filter : searchUser).length == 0">
+            <div class="users-list-clean" *ngIf="(dataUsers | filter : searchUser | checkFilter : positionUsers).length == 0">
                 По вашему запросу ничего не найдено
             </div>
             

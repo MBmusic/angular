@@ -5,8 +5,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CheckPipe implements PipeTransform {
-    transform(items: any[], check: any) { 
-        console.log(check);
-        return items;
+    transform(itemsData: any[], itemsPositions: any[]) { 
+        if(!itemsData) {
+            return [];
+        }
+
+        return itemsData.filter(it => {
+            for(let i = 0; i < itemsPositions.length; i++) {
+                if(itemsPositions[i].selected && (itemsPositions[i].position == it.position)) {
+                    return true;
+                }
+            }
+        });
    }
 }

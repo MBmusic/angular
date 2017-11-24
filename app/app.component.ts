@@ -28,7 +28,15 @@ export class AppComponent {
 
     changeCheckboxes() {
         this.positionUsers = this.positionUsers.slice();
-    }  
+    } 
+    
+    selectAllCheckboxes(ev) {
+        this.positionUsers.forEach(x => x.selected = ev.target.checked)
+    }
+      
+    itemCheck() {
+        return this.positionUsers.every(_ => _.selected);
+    }
 
     positionTitlesPopup(mainTitle: string, btnTitle: string, eventUser: string) {
         this.fieldError = true;
