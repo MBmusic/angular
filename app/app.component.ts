@@ -32,6 +32,7 @@ export class AppComponent {
     
     selectAllCheckboxes(ev) {
         this.positionUsers.forEach(x => x.selected = ev.target.checked)
+        this.changeCheckboxes();
     }
       
     itemCheck() {
