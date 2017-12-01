@@ -19,6 +19,20 @@
     </div>
 </div>
 
+<div id="popup-users" class="uk-modal">
+    <div class="uk-modal-dialog">   
+        <a class="uk-modal-close uk-close"></a>
+
+        <div class="popup-content">
+            <div class="title">{{ titleAddPosition }}</div>
+
+            <form>
+                123
+            </form>
+        </div>
+    </div>
+</div>
+
 <form method="post">
     <div>
         <div class="header">
@@ -63,7 +77,8 @@
 
             <div class="head-btn-admin">
                 <a href="#popup-positions" class="btn head-btn-add" (click)="addPositionPopup(addPodition)" data-uk-modal>+ должность</a>
-                <a href="" class="btn head-btn-add">+ сотрудник</a>  
+                <a href="#popup-users" class="btn head-btn-add" *ngIf="positionUsers.length != 0" data-uk-modal>+ сотрудник</a>
+                <span class="btn head-btn-add no-active" *ngIf="positionUsers.length == 0">+ сотрудник</span>   
             </div>
 
             <div class="clear"></div>
@@ -92,8 +107,10 @@
             <div class="clear"></div>
         </div>
 
-        <div class="users-list-clean" *ngIf="dataUsers.length == 0">
-            Список сотрудников пуст
+        <div class="users-list" *ngIf="dataUsers.length == 0">
+            <div class="users-list-clean">
+                Список сотрудников пуст
+            </div>
         </div>
     </div>
 </form>

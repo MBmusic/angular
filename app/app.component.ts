@@ -22,6 +22,10 @@ export class AppComponent {
     addChangePosition: string = "";
     positionNum: number;
 
+    /* Users values */
+
+    /* ... */
+
     log(i) {
         console.log(i);
     }
@@ -47,6 +51,7 @@ export class AppComponent {
     }
 
     addPositionPopup() {
+        this.positionInput = "";
         this.positionTitlesPopup("Добавить должность", "Добавить", "добавление");
     }
 
@@ -86,6 +91,7 @@ export class AppComponent {
 
         } else if(this.addChangePosition == "изменение") {
             positionUsers[this.positionNum].position = this.positionInput;
+            UIkit.modal("#popup-positions").hide();
             return this.fieldError = true;
         }
     }
@@ -109,6 +115,11 @@ export class AppComponent {
             return this.positionUsers.length = 0;
         });
     }
+
+
+    /* */
     
+
+
 }
 
