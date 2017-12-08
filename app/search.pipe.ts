@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform {
 
         if(!searchUser) { 
             return items; 
-        }
+        } 
 
         searchUser = searchUser.toLowerCase();
         

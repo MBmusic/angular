@@ -24,10 +24,42 @@
         <a class="uk-modal-close uk-close"></a>
 
         <div class="popup-content">
-            <div class="title">{{ titleAddPosition }}</div>
+            <div class="title">{{ titleUser }}</div>
 
-            <form>
-                123
+            <form (ngSubmit)="createChangeUser()">
+                <div class="label">
+                    <input type="text" placeholder="Имя" name="name" [(ngModel)]="nameUserInput" required>
+                    <span *ngIf="!fieldErrorBlockName" class="errorMessage">{{ fieldErrorName }}</span>
+                </div>
+                <div class="label">
+                    <input type="text" placeholder="Фамилия" name="surname" [(ngModel)]="surnameUserInput" required>
+                    <span *ngIf="!fieldErrorBlockSurname" class="errorMessage">{{ fieldErrorSurname }}</span>
+                </div>
+                <div class="label">
+                    <input type="text" placeholder="Отчество" name="patronymic" [(ngModel)]="patronymicUserInput" required>
+                    <span *ngIf="!fieldErrorBlockPatronymic" class="errorMessage">{{ fieldErrorPatronymic }}</span>
+                </div>
+                <div class="label">
+                    <div class="uk-form-select" data-uk-form-select>
+                        <span>{{ positionUserSelect }}</span>
+                        <select [(ngModel)]="positionUserSelect" name="positionUserSelect">
+                            <option *ngFor="let positionUser of positionUsers">{{positionUser.position}}</option>
+                        </select>
+                    </div>
+                    <span *ngIf="!fieldErrorBlockPosition" class="errorMessage">{{ fieldErrorPosition }}</span>
+                </div>
+                <div class="label">
+                    <input type="text" placeholder="Email" name="email" [(ngModel)]="emailUserInput" required>
+                    <span *ngIf="!fieldErrorBlockEmail" class="errorMessage">{{ fieldErrorEmail }}</span>
+                </div>
+                <div class="label">
+                    <input type="text" placeholder="Skype" name="skype" [(ngModel)]="skypeUserInput" required>
+                    <span *ngIf="!fieldErrorBlockSkype" class="errorMessage">{{ fieldErrorSkype }}</span>
+                </div>
+
+                <div class="label label-btn">
+                    <button type="submit" class="btn head-btn-add">{{ titleBtnAddUser }}</button>
+                </div>
             </form>
         </div>
     </div>
@@ -75,9 +107,11 @@
                 </div>
             </div>
 
+            
+
             <div class="head-btn-admin">
-                <a href="#popup-positions" class="btn head-btn-add" (click)="addPositionPopup(addPodition)" data-uk-modal>+ должность</a>
-                <a href="#popup-users" class="btn head-btn-add" *ngIf="positionUsers.length != 0" data-uk-modal>+ сотрудник</a>
+                <a href="#popup-positions" class="btn head-btn-add" (click)="addPositionPopup()" data-uk-modal>+ должность</a>
+                <a href="#popup-users" class="btn head-btn-add" (click)="addUserPopup()" *ngIf="positionUsers.length != 0" data-uk-modal>+ сотрудник</a>
                 <span class="btn head-btn-add no-active" *ngIf="positionUsers.length == 0">+ сотрудник</span>   
             </div>
 

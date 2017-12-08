@@ -393,6 +393,7 @@ button {
 
 .popup-content .label {
     text-align: center;
+    position: relative;
 }
 
 .popup-content .label .btn {
@@ -462,4 +463,36 @@ body > .uk-modal .uk-modal-dialog {
 
 .uk-modal-footer .js-modal-confirm:hover {
     background: #95bc3f;
+}
+
+.popup-content .label .hp-drop {
+    position: relative;
+    z-index: 10;
+}
+
+.uk-form-select {
+    width: 100%;
+    height: 40px;
+    background: #435c74 url(assets/img/arrow-select.png) right center no-repeat;
+    border: 0 none;
+    border-radius: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #d4dde6;
+    font-size: 16px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.uk-form-select:hover {
+    background: #4f6983 url(assets/img/arrow-select.png) right center no-repeat;
+}
+
+.uk-form-select span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 40px;
+    display: block;
+    text-align: left;
+    color: #d4dde6;
 }
