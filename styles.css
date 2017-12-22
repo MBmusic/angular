@@ -298,7 +298,7 @@ button {
     margin-right: 2%;
 }
 
-.users-list .user-block:nth-child(3) {
+.users-list .user-block:nth-child(3n) {
     margin-right: 0;
 }
 
@@ -495,4 +495,55 @@ body > .uk-modal .uk-modal-dialog {
     display: block;
     text-align: left;
     color: #d4dde6;
+}
+
+@media (max-width: 1200px) {
+    .users-list .user-block:nth-child(3n) {
+        margin-right: 2%;
+    }
+
+    .users-list .user-block {
+        width: 49%;
+    }
+
+    .users-list .user-block:nth-child(2n) {
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 800px) {
+    .users-list .user-block .ub-info span.ub-name {
+        font-size: 14px;
+    }
+
+    .users-list .user-block .ub-img {
+        width: 70px;
+    }
+
+    .users-list .user-block .ub-info {
+        width: calc(100% - 85px);
+    }
+
+    .users-list .user-block .ub-info span {
+        margin-bottom: 4px;
+    }
+}
+
+@media (max-width: 600px) { 
+    .users-list .user-block {
+        width: 100%;
+    }
+
+    .users-list .user-block:nth-child(3n),
+    .users-list .user-block:nth-child(2n) {
+        margin-right: 0px;
+    }
+
+    .users-list .user-block .ub-img {
+        width: 120px;
+    }
+
+    .users-list .user-block .ub-info {
+        width: calc(100% - 135px);
+    }
 }
