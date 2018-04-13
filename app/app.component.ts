@@ -101,8 +101,8 @@ export class AppComponent {
 
         let LowerThisPosition = this.positionInput.toLowerCase();
         
-        for(let i = 0; i < positionUsers.length; i++) {
-            if(LowerThisPosition == positionUsers[i].position.toLowerCase()) {
+        for(let i = 0; i < this.positionUsers.length; i++) {
+            if(LowerThisPosition == this.positionUsers[i].position.toLowerCase()) {
                 this.fieldErrorMessage = "Такая должность уже добавлена";
                 return this.fieldError = false;
             }     
@@ -114,7 +114,7 @@ export class AppComponent {
                 selected: true
             };
 
-            positionUsers.push(pos);
+            this.positionUsers.push(pos);
 
             this.positionInput = '';
             UIkit.modal.alert("Должность добавлена!");
@@ -122,7 +122,7 @@ export class AppComponent {
             return this.fieldError = true;
 
         } else if(this.addChangePosition == "изменение") {
-            positionUsers[this.positionNum].position = this.positionInput;
+            this.positionUsers[this.positionNum].position = this.positionInput;
 
             for(let i = 0; i < dataUsers.length; i++) {
                 if(dataUsers[i].position == this.positionReserveCopy) {
@@ -136,8 +136,7 @@ export class AppComponent {
     }
 
     addClassPositions() {
-        //console.log(positionUsers.length);
-        return (positionUsers.length > 0) ? "" : "no-positions";
+        return (this.positionUsers.length > 0) ? "" : "no-positions";
     }
 
     deletePosition(position: any) {       
@@ -182,8 +181,8 @@ export class AppComponent {
         this.surnameUserInput = '';
         this.patronymicUserInput = '';
 
-        if(positionUsers.length == 1) {
-            this.positionUserSelect = positionUsers[0].position;
+        if(this.positionUsers.length == 1) {
+            this.positionUserSelect = this.positionUsers[0].position;
         } else {
             this.positionUserSelect = 'Выберите должность';
         }

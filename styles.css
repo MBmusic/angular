@@ -84,7 +84,7 @@ button {
 
 .head-search {
     float: left;
-    width: calc(80% - 439px);
+    width: calc(100% - 719px);
     padding: 10px 10px 0;
 }
 
@@ -103,7 +103,7 @@ button {
 }
 
 .head-positions-drop {
-    width: 20%;
+    width: 280px;
     float: left;
     position: relative;
     padding: 10px 10px 0;
@@ -159,7 +159,7 @@ button {
 .hp-drop .uk-dropdown div label {
     width: 100%;
     display: block;
-    padding: 0 15px;
+    padding: 0 0 0 15px;
     cursor: pointer;
     line-height: 38px;
     float: left;
@@ -251,6 +251,10 @@ button {
     display: inline-block;
     vertical-align: middle;
     margin-left: 6px;
+    width: 142px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .head-btn-admin .btn {
