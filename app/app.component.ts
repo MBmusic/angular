@@ -266,6 +266,17 @@ export class AppComponent {
         return this.errorsUsersTrue(); 
     }
 
+    deleteUser(user: any) {
+        UIkit.modal.confirm("Вы уверены что хотите удалить сотрудника?", () => {
+            let index = this.dataUsers.indexOf(user);
+            this.dataUsers.splice(index, 1);
+        });
+    }
+
+    changeUserInformation(userIndex: boolean) {
+        this.log(userIndex);
+    }
+
 
 }
 

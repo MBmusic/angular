@@ -135,6 +135,11 @@
                     <span class="ub-email"><b>E-mail:</b> {{ dataUser.email }}</span>
                 </div>
 
+                <div class="user-control">
+                    <span class="user-control-delete" (click)="deleteUser(dataUser)"></span>
+                    <a href="#popup-users" class="user-control-update" (click)="changeUserInformation(dataUsers.indexOf(dataUser))" data-uk-modal></a>
+                </div>
+
                 <div class="clear"></div>
             </div>
 

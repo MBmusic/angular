@@ -300,6 +300,15 @@ button {
     float: left;
     margin-bottom: 15px;
     margin-right: 2%;
+    position: relative;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.users-list .user-block:hover .user-control {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
 }
 
 .users-list .user-block:nth-child(3n) {
@@ -342,6 +351,44 @@ button {
     color: #fff;
     font-weight: 700;
     font-size: 18px;
+}
+
+.user-control {
+    width: 74px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    -webkit-transform: translateX(74px);
+    transform: translateX(74px);
+}
+
+.user-control span,
+.user-control a {
+    width: 36px;
+    height: 36px;
+    float: right;
+    margin-left: 1px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    display: block;
+    border-radius: 3px;
+}
+
+.user-block .user-control-update {
+    background: #263c51 url(assets/img/edit-icon.png) center no-repeat;
+}
+
+.user-block .user-control-delete {
+    background: #263c51 url(assets/img/delete-icon.png) center no-repeat;
+}
+
+.user-control span:hover,
+.user-control a:hover {
+    background-color: #35506b;
 }
 
 .users-list-clean {
