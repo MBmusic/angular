@@ -36,6 +36,8 @@ export class AppComponent {
     emailUserInput: string = "";
     skypeUserInput: string = "";
 
+    userSelectId: number;
+
     /* User errors */
 
     fieldErrorName: string = "";
@@ -250,6 +252,16 @@ export class AppComponent {
         }
 
         if(this.addChangeUser == "добавление") {
+            for(let i = 0; i < this.dataUsers.length; i++) {
+                if(this.dataUsers[i].email == this.emailUserInput) {
+                    UIkit.modal.alert("ОШИБКА<br><br>Пользователь с такой почтой уже есть");
+                    return false;
+                } else if(this.dataUsers[i].skype == this.skypeUserInput) {
+                    UIkit.modal.alert("ОШИБКА<br><br>Пользователь с таким скайпом уже есть");
+                    return false;
+                }
+            }
+
             let user = {
                 avatarUrl: "/assets/img/user.jpg",
                 name: this.nameUserInput,
@@ -273,9 +285,12 @@ export class AppComponent {
             return this.errorsUsersTrue(); 
         } else if(this.addChangeUser == "изменение") {
 
-            /*for(var i = 0; i < this.dataUsers.length; i++) {
-                 
-            }*/
+            this.dataUsers[this.userSelectId].name = this.nameUserInput;
+            this.dataUsers[this.userSelectId].surname = this.surnameUserInput;
+            this.dataUsers[this.userSelectId].patronymic = this.patronymicUserInput;
+            this.dataUsers[this.userSelectId].position = this.positionUserSelect;
+            this.dataUsers[this.userSelectId].email = this.emailUserInput;
+            this.dataUsers[this.userSelectId].skype = this.skypeUserInput;
 
             UIkit.modal("#popup-users").hide();
             return this.errorsUsersTrue(); 
@@ -289,13 +304,14 @@ export class AppComponent {
         });
     }
 
-    changeUserInformation(userIndex: boolean) {
+    changeUserInformation(userIndex: any) {
         this.nameUserInput = this.dataUsers[userIndex].name;
         this.surnameUserInput = this.dataUsers[userIndex].surname;
         this.patronymicUserInput = this.dataUsers[userIndex].patronymic;
         this.positionUserSelect = this.dataUsers[userIndex].position;
         this.emailUserInput = this.dataUsers[userIndex].email;
         this.skypeUserInput = this.dataUsers[userIndex].skype;
+        this.userSelectId = userIndex;
         this.userTitlesPopup("Редактирование информации", "изменить", "изменение");
     }
 
