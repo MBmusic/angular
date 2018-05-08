@@ -21,6 +21,7 @@ export class AppComponent {
     titleAddPosition: string = "";
     titleBtnAddPosition: string = "";
     addChangePosition: string = "";
+    addChangeUser: string = "";
     positionNum: number;
 
     /* Users values */
@@ -174,6 +175,13 @@ export class AppComponent {
         this.fieldErrorBlockSkype = true;
     }
 
+    userTitlesPopup(title: string, btnText: string, eventUser) {
+        this.errorsUsersTrue();
+        this.titleUser = title;
+        this.titleBtnAddUser = btnText;
+        this.addChangeUser = eventUser;
+    }
+
     addUserPopup() {
         this.errorsUsersTrue();
 
@@ -189,9 +197,7 @@ export class AppComponent {
         
         this.emailUserInput = '';
         this.skypeUserInput = '';
-
-        this.titleUser = "Добавить пользователя";
-        this.titleBtnAddUser = "Добавить";
+        this.userTitlesPopup("Добавить пользователя", "Добавить", "добавление");
     }
 
     createChangeUser() {
@@ -243,27 +249,37 @@ export class AppComponent {
             this.fieldErrorBlockSkype = true;
         }
 
-        let user = {
-            avatarUrl: "/assets/img/user.jpg",
-            name: this.nameUserInput,
-            surname: this.surnameUserInput,
-            patronymic: this.patronymicUserInput,
-            position: this.positionUserSelect,
-            email: this.emailUserInput,
-            skype: this.skypeUserInput
-        };
+        if(this.addChangeUser == "добавление") {
+            let user = {
+                avatarUrl: "/assets/img/user.jpg",
+                name: this.nameUserInput,
+                surname: this.surnameUserInput,
+                patronymic: this.patronymicUserInput,
+                position: this.positionUserSelect,
+                email: this.emailUserInput,
+                skype: this.skypeUserInput
+            };
 
-        dataUsers.push(user);
+            dataUsers.push(user);
 
-        this.nameUserInput = '';
-        this.surnameUserInput = '';
-        this.patronymicUserInput = '';
-        this.positionUserSelect = 'Выберите должность';
-        this.emailUserInput = '';
-        this.skypeUserInput = '';
-        UIkit.modal.alert("Пользователь добавлен!");
+            this.nameUserInput = '';
+            this.surnameUserInput = '';
+            this.patronymicUserInput = '';
+            this.positionUserSelect = 'Выберите должность';
+            this.emailUserInput = '';
+            this.skypeUserInput = '';
+            UIkit.modal.alert("Пользователь добавлен!");
 
-        return this.errorsUsersTrue(); 
+            return this.errorsUsersTrue(); 
+        } else if(this.addChangeUser == "изменение") {
+
+            /*for(var i = 0; i < this.dataUsers.length; i++) {
+                 
+            }*/
+
+            UIkit.modal("#popup-users").hide();
+            return this.errorsUsersTrue(); 
+        }
     }
 
     deleteUser(user: any) {
@@ -274,7 +290,13 @@ export class AppComponent {
     }
 
     changeUserInformation(userIndex: boolean) {
-        this.log(userIndex);
+        this.nameUserInput = this.dataUsers[userIndex].name;
+        this.surnameUserInput = this.dataUsers[userIndex].surname;
+        this.patronymicUserInput = this.dataUsers[userIndex].patronymic;
+        this.positionUserSelect = this.dataUsers[userIndex].position;
+        this.emailUserInput = this.dataUsers[userIndex].email;
+        this.skypeUserInput = this.dataUsers[userIndex].skype;
+        this.userTitlesPopup("Редактирование информации", "изменить", "изменение");
     }
 
 
