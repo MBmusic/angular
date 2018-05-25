@@ -98,7 +98,7 @@
                                 <span>{{ positionUser.position }}</span>
                             </label>
  
-                            <span class="item delete" (click)="deletePosition(positionUser)"></span>
+                            <span class="item delete" (click)="deletePosition(positionUser.$key)"></span>
                             <a href="#popup-positions" class="item edit" (click)="changePositionPopup(positionUser.position, positionUsers.indexOf(positionUser))" data-uk-modal></a>
 
                             <div class="clear"></div>
@@ -119,6 +119,7 @@
         </div>
 
         <div class="users-list" *ngIf="dataUsers.length > 0">
+            
             <div class="users-list-clean" *ngIf="(dataUsers | filter : searchUser | checkFilter : positionUsers).length == 0">
                 По вашему запросу ничего не найдено
             </div>

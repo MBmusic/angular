@@ -1,4 +1,4 @@
-export const dataUsers = [
+/*export const dataUsers = [
     {
         avatarUrl: "/assets/img/user.jpg",
         name: "Вася",
@@ -35,4 +35,4 @@ export const dataUsers = [
         email: "test@test.com",
         skype: "vasya.dijust"
     }
-];
+];*/

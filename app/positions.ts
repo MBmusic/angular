@@ -1,4 +1,4 @@
-export const positionUsers = [
+/*export const positionUsers = [
     {
         position: "PHP developer",
         selected: true
@@ -11,4 +11,4 @@ export const positionUsers = [
         position: "SEO specialist",
         selected: true
     }
-];
+];*/

@@ -7,13 +7,31 @@ import { SortUsersPipe } from './sort.pipe';
 import { FilterPipe } from './search.pipe';
 import { CheckPipe } from './check.pipe';
 
+/* Firebase */
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { environment } from '../environments/environment';
+
 enableProdMode();
 
 @NgModule({
-    declarations: [ AppComponent, SortUsersPipe, FilterPipe, CheckPipe ],
-    imports: [ BrowserModule, FormsModule ],
+    declarations: [ 
+        AppComponent, 
+        SortUsersPipe, 
+        FilterPipe, 
+        CheckPipe 
+    ],
+    imports: [ 
+        BrowserModule, 
+        FormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule  
+    ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 
 export class AppModule { }

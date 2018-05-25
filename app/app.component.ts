@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { dataUsers } from "./data";
-import { positionUsers } from "./positions";
+import { Component, OnInit } from '@angular/core';
 import { Pipe } from "@angular/core";
+import { TodoService } from './shared/todo.service';
 
 declare var UIkit:any;
 
@@ -9,11 +8,13 @@ declare var UIkit:any;
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    providers: [ TodoService ]
 })
 
-export class AppComponent {
-    dataUsers: Array<any> = dataUsers;
-    positionUsers: Array<any> = positionUsers;
+export class AppComponent implements OnInit {
+    dataUsers: any[];
+    positionUsers: any[];
+
     positionInput: string = "";
     positionReserveCopy: string = "";
     fieldError: boolean = true;
@@ -58,6 +59,30 @@ export class AppComponent {
 
     log(i) {
         console.log(i);
+    }
+
+    constructor(private toDoService: TodoService) {  }
+
+    ngOnInit() {
+        this.toDoService.getPositionsList().snapshotChanges()
+        .subscribe(item => {
+            this.positionUsers = [];
+            item.forEach(el => {
+                let x = el.payload.toJSON();
+                x["$key"] = el.key;
+                this.positionUsers.push(x);
+            })
+        });
+
+        this.toDoService.getUsersList().snapshotChanges()
+        .subscribe(item => {
+            this.dataUsers = [];
+            item.forEach(el => {
+                let x = el.payload.toJSON();
+                x["$key"] = el.key;
+                this.dataUsers.push(x);
+            })
+        });
     }
 
     changeCheckboxes() {
@@ -117,7 +142,7 @@ export class AppComponent {
                 selected: true
             };
 
-            this.positionUsers.push(pos);
+            this.toDoService.addPosition(this.positionInput);
 
             this.positionInput = '';
             UIkit.modal.alert("Должность добавлена!");
@@ -127,9 +152,11 @@ export class AppComponent {
         } else if(this.addChangePosition == "изменение") {
             this.positionUsers[this.positionNum].position = this.positionInput;
 
-            for(let i = 0; i < dataUsers.length; i++) {
-                if(dataUsers[i].position == this.positionReserveCopy) {
-                    dataUsers[i].position = this.positionInput;
+            for(let i = 0; i < this.dataUsers.length; i++) {
+                if(this.dataUsers[i].position == this.positionReserveCopy) {
+                    /*this.dataUsers[i].position = this.positionInput;*/
+                    //this.toDoService.addPosition(this.positionInput);
+                    this.toDoService.changePosition(this.positionNum, this.positionInput);
                 }
             }
 
@@ -144,24 +171,26 @@ export class AppComponent {
 
     deletePosition(position: any) {       
         UIkit.modal.confirm("Вы уверены что хотите удалить должность?", () => {
-            let index = this.positionUsers.indexOf(position);
-    
-            if(index > -1) {
-                this.positionUsers.splice(index, 1);
-            }
+
+            //let index = this.positionUsers.indexOf(position);
+            this.toDoService.deletePosition(position);
+            /*if(index > -1) {
+               this.positionUsers.splice(index, 1);
+               this.toDoService.deletePosition(index);
+            }*/
             
-            for(let i = 0; i < dataUsers.length; i++) {
+            /*for(let i = 0; i < dataUsers.length; i++) {
                 if(dataUsers[i].position == position.position) {
                     dataUsers.splice(i, 1);
                 } 
-            }
+            }*/
         });
     }
 
     deleteAllPosition() {
         UIkit.modal.confirm("Вы уверены что хотите удалить все должности?", () => {
-            this.positionUsers.length = 0;
-            this.dataUsers.length = 0;
+            this.toDoService.deleteAllPositions();
+            this.toDoService.deleteAllUsers();
         });
     }
 
@@ -191,11 +220,11 @@ export class AppComponent {
         this.surnameUserInput = '';
         this.patronymicUserInput = '';
 
-        if(this.positionUsers.length == 1) {
+        /*if(this.positionUsers.length == 1) {
             this.positionUserSelect = this.positionUsers[0].position;
         } else {
             this.positionUserSelect = 'Выберите должность';
-        }
+        }*/
         
         this.emailUserInput = '';
         this.skypeUserInput = '';
@@ -252,7 +281,7 @@ export class AppComponent {
         }
 
         if(this.addChangeUser == "добавление") {
-            for(let i = 0; i < this.dataUsers.length; i++) {
+            /*for(let i = 0; i < this.dataUsers.length; i++) {
                 if(this.dataUsers[i].email == this.emailUserInput) {
                     UIkit.modal.alert("ОШИБКА<br><br>Пользователь с такой почтой уже есть");
                     return false;
@@ -260,9 +289,9 @@ export class AppComponent {
                     UIkit.modal.alert("ОШИБКА<br><br>Пользователь с таким скайпом уже есть");
                     return false;
                 }
-            }
+            }*/
 
-            let user = {
+            /*let user = {
                 avatarUrl: "/assets/img/user.jpg",
                 name: this.nameUserInput,
                 surname: this.surnameUserInput,
@@ -270,9 +299,10 @@ export class AppComponent {
                 position: this.positionUserSelect,
                 email: this.emailUserInput,
                 skype: this.skypeUserInput
-            };
+            };*/
 
-            dataUsers.push(user);
+            /*dataUsers.push(user);*/
+            this.toDoService.addUser(this.nameUserInput, this.surnameUserInput, this.patronymicUserInput, this.positionUserSelect, this.emailUserInput, this.skypeUserInput);
 
             this.nameUserInput = '';
             this.surnameUserInput = '';
