@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     addChangePosition: string = "";
     addChangeUser: string = "";
     positionNum: number;
+    positionKey: string;
 
     /* Users values */
 
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
     skypeUserInput: string = "";
 
     userSelectId: number;
+    userKey: string;
 
     /* User errors */
 
@@ -114,8 +116,10 @@ export class AppComponent implements OnInit {
         this.positionTitlesPopup("Добавить должность", "Добавить", "добавление");
     }
 
-    changePositionPopup(position: string, num: number) {
+    changePositionPopup(position: string, num: number, key: any) {
+        //console.log(key);
         this.positionNum = num;
+        this.positionKey = key;
         this.positionInput = position;
         this.positionReserveCopy = position;
         this.positionTitlesPopup("Изменить должность", "Изменить", "изменение");
@@ -137,30 +141,16 @@ export class AppComponent implements OnInit {
         }
 
         if(this.addChangePosition == "добавление") {
-            let pos = {
-                position: this.positionInput,
-                selected: true
-            };
-
             this.toDoService.addPosition(this.positionInput);
-
             this.positionInput = '';
             UIkit.modal.alert("Должность добавлена!");
+            UIkit.modal("#popup-positions").hide();
 
             return this.fieldError = true;
-
         } else if(this.addChangePosition == "изменение") {
-            this.positionUsers[this.positionNum].position = this.positionInput;
-
-            for(let i = 0; i < this.dataUsers.length; i++) {
-                if(this.dataUsers[i].position == this.positionReserveCopy) {
-                    /*this.dataUsers[i].position = this.positionInput;*/
-                    //this.toDoService.addPosition(this.positionInput);
-                    this.toDoService.changePosition(this.positionNum, this.positionInput);
-                }
-            }
-
+            this.toDoService.changePosition(this.positionKey, this.positionInput);
             UIkit.modal("#popup-positions").hide();
+
             return this.fieldError = true;
         }
     }
@@ -169,15 +159,9 @@ export class AppComponent implements OnInit {
         return (this.positionUsers.length > 0) ? "" : "no-positions";
     }
 
-    deletePosition(position: any) {       
+    deletePosition(position: any) {      
         UIkit.modal.confirm("Вы уверены что хотите удалить должность?", () => {
-
-            //let index = this.positionUsers.indexOf(position);
             this.toDoService.deletePosition(position);
-            /*if(index > -1) {
-               this.positionUsers.splice(index, 1);
-               this.toDoService.deletePosition(index);
-            }*/
             
             /*for(let i = 0; i < dataUsers.length; i++) {
                 if(dataUsers[i].position == position.position) {
@@ -215,20 +199,32 @@ export class AppComponent implements OnInit {
 
     addUserPopup() {
         this.errorsUsersTrue();
-
         this.nameUserInput = '';
         this.surnameUserInput = '';
         this.patronymicUserInput = '';
 
-        /*if(this.positionUsers.length == 1) {
+        if(this.positionUsers.length == 1) {
             this.positionUserSelect = this.positionUsers[0].position;
         } else {
             this.positionUserSelect = 'Выберите должность';
-        }*/
+        }
         
         this.emailUserInput = '';
         this.skypeUserInput = '';
         this.userTitlesPopup("Добавить пользователя", "Добавить", "добавление");
+    }
+
+    changeUserInformation(userIndex: any, key: string) {
+        this.nameUserInput = this.dataUsers[userIndex].name;
+        this.surnameUserInput = this.dataUsers[userIndex].surname;
+        this.patronymicUserInput = this.dataUsers[userIndex].patronymic;
+        this.positionUserSelect = this.dataUsers[userIndex].position;
+        this.emailUserInput = this.dataUsers[userIndex].email;
+        this.skypeUserInput = this.dataUsers[userIndex].skype;
+        this.userSelectId = userIndex;
+        this.userKey = key;
+
+        this.userTitlesPopup("Редактирование информации", "изменить", "изменение");
     }
 
     createChangeUser() {
@@ -280,28 +276,19 @@ export class AppComponent implements OnInit {
             this.fieldErrorBlockSkype = true;
         }
 
+        for(let i = 0; i < this.dataUsers.length; i++) {
+            if(this.dataUsers[i].email == this.emailUserInput) {
+                this.fieldErrorBlockEmail = false;
+                this.fieldErrorEmail = "Пользователь с такой почтой уже есть";
+                return false;
+            } else if(this.dataUsers[i].skype == this.skypeUserInput) {
+                this.fieldErrorBlockSkype = false;
+                this.fieldErrorSkype = "Пользователь с таким скайпом уже есть";
+                return false;
+            }
+        }
+
         if(this.addChangeUser == "добавление") {
-            /*for(let i = 0; i < this.dataUsers.length; i++) {
-                if(this.dataUsers[i].email == this.emailUserInput) {
-                    UIkit.modal.alert("ОШИБКА<br><br>Пользователь с такой почтой уже есть");
-                    return false;
-                } else if(this.dataUsers[i].skype == this.skypeUserInput) {
-                    UIkit.modal.alert("ОШИБКА<br><br>Пользователь с таким скайпом уже есть");
-                    return false;
-                }
-            }*/
-
-            /*let user = {
-                avatarUrl: "/assets/img/user.jpg",
-                name: this.nameUserInput,
-                surname: this.surnameUserInput,
-                patronymic: this.patronymicUserInput,
-                position: this.positionUserSelect,
-                email: this.emailUserInput,
-                skype: this.skypeUserInput
-            };*/
-
-            /*dataUsers.push(user);*/
             this.toDoService.addUser(this.nameUserInput, this.surnameUserInput, this.patronymicUserInput, this.positionUserSelect, this.emailUserInput, this.skypeUserInput);
 
             this.nameUserInput = '';
@@ -311,16 +298,12 @@ export class AppComponent implements OnInit {
             this.emailUserInput = '';
             this.skypeUserInput = '';
             UIkit.modal.alert("Пользователь добавлен!");
+            UIkit.modal("#popup-users").hide();
 
             return this.errorsUsersTrue(); 
         } else if(this.addChangeUser == "изменение") {
 
-            this.dataUsers[this.userSelectId].name = this.nameUserInput;
-            this.dataUsers[this.userSelectId].surname = this.surnameUserInput;
-            this.dataUsers[this.userSelectId].patronymic = this.patronymicUserInput;
-            this.dataUsers[this.userSelectId].position = this.positionUserSelect;
-            this.dataUsers[this.userSelectId].email = this.emailUserInput;
-            this.dataUsers[this.userSelectId].skype = this.skypeUserInput;
+            this.toDoService.changeUser(this.userKey, this.nameUserInput, this.surnameUserInput, this.patronymicUserInput, this.positionUserSelect, this.emailUserInput, this.skypeUserInput);
 
             UIkit.modal("#popup-users").hide();
             return this.errorsUsersTrue(); 
@@ -329,22 +312,8 @@ export class AppComponent implements OnInit {
 
     deleteUser(user: any) {
         UIkit.modal.confirm("Вы уверены что хотите удалить сотрудника?", () => {
-            let index = this.dataUsers.indexOf(user);
-            this.dataUsers.splice(index, 1);
+            this.toDoService.deleteUser(user);
         });
     }
-
-    changeUserInformation(userIndex: any) {
-        this.nameUserInput = this.dataUsers[userIndex].name;
-        this.surnameUserInput = this.dataUsers[userIndex].surname;
-        this.patronymicUserInput = this.dataUsers[userIndex].patronymic;
-        this.positionUserSelect = this.dataUsers[userIndex].position;
-        this.emailUserInput = this.dataUsers[userIndex].email;
-        this.skypeUserInput = this.dataUsers[userIndex].skype;
-        this.userSelectId = userIndex;
-        this.userTitlesPopup("Редактирование информации", "изменить", "изменение");
-    }
-
-
 }
 

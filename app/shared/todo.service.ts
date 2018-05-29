@@ -25,14 +25,12 @@ export class TodoService {
         });
     }
 
-    changePosition(positionInData: any, positionInput: any) {
-        /*positionInData = positionInput;*/
-
-        this.positionsList[positionInData] = positionInput;
+    changePosition(key: string, text: string) {
+        this.positionsList.update(key, { position: text });  
     }
 
-    deletePosition(index: any) {
-        this.positionsList.remove(index);
+    deletePosition(key: string) {
+        this.positionsList.remove(key);
     }
 
     deleteAllPositions() {
@@ -51,12 +49,20 @@ export class TodoService {
         });
     }
 
-    changeUser() {
-
+    changeUser(key: string, nameUser: any, surnameUser: any, patronymicUser: any, positionUser: any, emailUser: any, skypeUser: any) {
+        this.usersList.update(key, {
+            avatarUrl: "/assets/img/user.jpg",
+            name: nameUser,
+            surname: surnameUser,
+            patronymic: patronymicUser,
+            position: positionUser,
+            email: emailUser,
+            skype: skypeUser
+        });
     }
 
-    deleteUser() {
-
+    deleteUser(key: string) {
+        this.usersList.remove(key);
     }
 
     deleteAllUsers() {
