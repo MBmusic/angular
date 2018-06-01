@@ -12,8 +12,8 @@ declare var UIkit:any;
 })
 
 export class AppComponent implements OnInit {
-    dataUsers: any[];
-    positionUsers: any[];
+    dataUsers = [];
+    positionUsers = [];
 
     positionInput: string = "";
     positionReserveCopy: string = "";
@@ -117,7 +117,6 @@ export class AppComponent implements OnInit {
     }
 
     changePositionPopup(position: string, num: number, key: any) {
-        //console.log(key);
         this.positionNum = num;
         this.positionKey = key;
         this.positionInput = position;
@@ -159,15 +158,15 @@ export class AppComponent implements OnInit {
         return (this.positionUsers.length > 0) ? "" : "no-positions";
     }
 
-    deletePosition(position: any) {      
-        UIkit.modal.confirm("Вы уверены что хотите удалить должность?", () => {
-            this.toDoService.deletePosition(position);
+    deletePosition(positionKey: string, position: any) { 
+        UIkit.modal.confirm("Вы уверены что хотите удалить должность?", () => {    
+            this.toDoService.deletePosition(positionKey);    
             
-            /*for(let i = 0; i < dataUsers.length; i++) {
-                if(dataUsers[i].position == position.position) {
-                    dataUsers.splice(i, 1);
+            for(let i = 0; i < this.dataUsers.length; i++) {
+                if(this.dataUsers[i].position == position.position) {
+                    this.toDoService.deleteUser(this.dataUsers[i].$key);
                 } 
-            }*/
+            }
         });
     }
 
